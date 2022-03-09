@@ -3,8 +3,8 @@ Contributors:      johnjamesjacoby, stuttter
 Tags:              taxonomy, term, meta, metadata, image, images
 Requires PHP:      5.6.20
 Requires at least: 4.4
-Tested up to:      5.2
-Stable tag:        2.0.0
+Tested up to:      5.7
+Stable tag:        2.0.1
 License:           GPLv2 or later
 License URI:       http://www.gnu.org/licenses/gpl-2.0.html
 Donate link:       https://ko-fi.com/jjj
@@ -84,6 +84,9 @@ if ( ! empty( $image ) ) {
 http://github.com/stuttter/wp-term-images/
 
 == Changelog ==
+
+= [2.0.1] - 2022-03-09 =
+* Fix fatal error
 
 = [2.0.0] - 2019-05-30 =
 * Update base class
