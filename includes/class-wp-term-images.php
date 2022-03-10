@@ -100,7 +100,7 @@ final class WP_Term_Images extends WP_Term_Meta_UI {
 	}
 
 	/**
-	 * Return the formatted output for the colomn row
+	 * Return the formatted output for the column row
 	 *
 	 * @since 0.1.2
 	 *
