@@ -17,17 +17,17 @@ if ( ! class_exists( 'WP_Term_Images' ) ) :
  *
  * @since 0.1.0
  */
-final class WP_Term_Images extends JJJ\WP\Term\Meta\UI {
+final class WP_Term_Images extends WP_Term_Meta_UI {
 
 	/**
 	 * @var string Plugin version
 	 */
-	public $version = '2.0.0';
+	public $version = '1.0.0';
 
 	/**
 	 * @var string Database version
 	 */
-	public $db_version = 201905300001;
+	public $db_version = 201701160001;
 
 	/**
 	 * @var string Metadata key
@@ -154,9 +154,12 @@ final class WP_Term_Images extends JJJ\WP\Term\Meta\UI {
 
 		// Get the meta value
 		$value  = $this->get_meta( $term_id );
-		$hidden = empty( $value )
-			? ' style="display: none;"'
-			: ''; ?>
+		$hidden = '';
+
+		if ( empty( $value ) ) {
+			$hidden = ' style="display: none;"';
+			$value = 0;
+		} ?>
 
 		<div>
 			<img id="wp-term-images-photo" src="<?php echo esc_url( wp_get_attachment_image_url( $value, 'full' ) ); ?>"<?php echo $hidden; ?> />
