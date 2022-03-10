@@ -1,7 +1,7 @@
 {
-  "name": "stuttter/wp-term-images",
+  "name": "humanmade/wp-term-images",
   "description": "Images for categories, tags, and other taxonomy terms",
-  "homepage": "https://github.com/stuttter/wp-term-images",
+  "homepage": "https://github.com/humanmade/wp-term-images",
   "type": "wordpress-plugin",
   "require": {
     "php": ">=5.6",

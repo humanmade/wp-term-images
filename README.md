@@ -1,6 +1,8 @@
 # WP Term Images
 
-Images for categories, tags, and other taxonomy terms
+[Forked from stuttter/wp-term-images](https://github.com/stuttter/wp-term-images)
+
+Images for categories, tags, and other taxonomy terms.
 
 WP Term Images allows users to assign images to any visible category, tag, or taxonomy term using the media library, providing a customized look for their taxonomy terms.
 
