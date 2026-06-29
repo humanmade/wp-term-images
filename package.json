@@ -1,0 +1,15 @@
+{
+  "name": "wp-term-images",
+  "description": "Images for categories, tags, and other taxonomy terms.",
+  "author": "Human Made Limited",
+  "license": "GPL-2.0-or-later",
+  "scripts": {
+    "build": "wp-scripts build",
+    "start": "wp-scripts start",
+    "lint:js": "wp-scripts lint-js ./src/**/*.js",
+    "format": "wp-scripts format ./src"
+  },
+  "devDependencies": {
+    "@wordpress/scripts": "^31.6.0"
+  }
+}

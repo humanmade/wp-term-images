@@ -41,3 +41,11 @@ function _wp_term_images_init() {
 	new WP_Term_Images( __FILE__ );
 }
 add_action( 'init', '_wp_term_images_init', 88 );
+
+/**
+ * Register the term-image block.
+ */
+function _wp_term_images_register_blocks() {
+	register_block_type_from_metadata( __DIR__ . '/build/blocks/term-image/block.json' );
+}
+add_action( 'init', '_wp_term_images_register_blocks' );
