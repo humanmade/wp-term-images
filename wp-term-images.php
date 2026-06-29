@@ -46,6 +46,6 @@ add_action( 'init', '_wp_term_images_init', 88 );
  * Register the term-image block.
  */
 function _wp_term_images_register_blocks() {
-	register_block_type_from_metadata( __DIR__ . '/build/blocks/term-image/block.json' );
+	register_block_type_from_metadata( __DIR__ . '/build/blocks/term-image' );
 }
 add_action( 'init', '_wp_term_images_register_blocks' );
