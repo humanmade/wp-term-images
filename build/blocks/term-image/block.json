@@ -18,6 +18,10 @@
       "type": "integer",
       "default": 0
     },
+    "taxonomy": {
+      "type": "string",
+      "default": "category"
+    },
     "imageSize": {
       "type": "string",
       "default": "full"
