@@ -12,6 +12,13 @@ import { __ } from '@wordpress/i18n';
 
 import metadata from './block.json';
 
+const IMAGE_SIZE_OPTIONS = [
+	{ label: __( 'Thumbnail', 'wp-term-images' ), value: 'thumbnail' },
+	{ label: __( 'Medium', 'wp-term-images' ), value: 'medium' },
+	{ label: __( 'Large', 'wp-term-images' ), value: 'large' },
+	{ label: __( 'Full', 'wp-term-images' ), value: 'full' },
+];
+
 function Edit( { attributes, setAttributes } ) {
 	const { termId, taxonomy, imageSize } = attributes;
 	const blockProps = useBlockProps();
@@ -28,18 +35,20 @@ function Edit( { attributes, setAttributes } ) {
 			if ( ! taxonomy ) {
 				return null;
 			}
-			return select( coreStore ).getEntityRecords(
-				'taxonomy',
-				taxonomy,
-				{ per_page: -1, _fields: [ 'id', 'name' ] }
-			);
+			return select( coreStore ).getEntityRecords( 'taxonomy', taxonomy, {
+				per_page: -1,
+				_fields: [ 'id', 'name' ],
+			} );
 		},
 		[ taxonomy ]
 	);
 
 	const taxonomyOptions = taxonomies
 		? [
-				{ label: __( '— Select taxonomy —', 'wp-term-images' ), value: '' },
+				{
+					label: __( '— Select taxonomy —', 'wp-term-images' ),
+					value: '',
+				},
 				...taxonomies.map( ( tax ) => ( {
 					label: tax.name,
 					value: tax.slug,
@@ -84,13 +93,30 @@ function Edit( { attributes, setAttributes } ) {
 							}
 						/>
 					) }
+					<SelectControl
+						label={ __( 'Image size', 'wp-term-images' ) }
+						value={ imageSize }
+						options={ IMAGE_SIZE_OPTIONS }
+						onChange={ ( value ) =>
+							setAttributes( { imageSize: value } )
+						}
+					/>
 				</PanelBody>
 			</InspectorControls>
 
 			<div { ...blockProps }>
 				{ termId ? (
-					<p style={ { margin: 0, padding: '1em', fontStyle: 'italic' } }>
-						{ __( 'Term image preview unavailable in editor.', 'wp-term-images' ) }
+					<p
+						style={ {
+							margin: 0,
+							padding: '1em',
+							fontStyle: 'italic',
+						} }
+					>
+						{ __(
+							'Term image preview unavailable in editor.',
+							'wp-term-images'
+						) }
 					</p>
 				) : (
 					<Placeholder
