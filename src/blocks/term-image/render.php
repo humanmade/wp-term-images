@@ -35,5 +35,5 @@ if ( ! $image ) {
 printf(
 	'<figure %s>%s</figure>',
 	get_block_wrapper_attributes(),
-	$image
+	wp_kses_post( $image )
 );

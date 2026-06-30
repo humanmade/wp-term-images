@@ -446,7 +446,7 @@ class UI {
 			$retval = $this->format_output( $meta );
 		}
 
-		echo $retval;
+		echo wp_kses_post( $retval );
 	}
 
 	/**
@@ -484,7 +484,7 @@ class UI {
 
 		// Bail if not updating meta_key
 		$meta = ! empty( $_POST[ $term_key ] )
-			? $_POST[ $term_key ]
+			? sanitize_text_field( wp_unslash( $_POST[ $term_key ] ) )
 			: '';
 
 		$this->set_meta( $term_id, $taxonomy, $meta );
