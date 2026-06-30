@@ -275,7 +275,8 @@ class UI {
 			return $orderby;
 		}
 
-		// Ordering by meta key
+		// Ordering by meta key.
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- read-only check to match a known key, not persisted.
 		if ( ! empty( $_REQUEST['orderby'] ) && ( $this->meta_key === $_REQUEST['orderby'] ) ) {
 			$orderby = 'meta_value';
 		}
@@ -432,7 +433,7 @@ class UI {
 	 */
 	public function add_column_value( $empty = '', $custom_column = '', $term_id = 0 ) {
 
-		// Bail if no taxonomy passed or not on the `meta_key` column
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only check used as render guard, not persisted.
 		if ( empty( $_REQUEST['taxonomy'] ) || ( $this->meta_key !== $custom_column ) || ! empty( $empty ) ) {
 			return $empty;
 		}
