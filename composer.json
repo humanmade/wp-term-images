@@ -13,5 +13,14 @@
       "name": "John James Jacoby",
       "email": "johnjamesjacoby@me.com"
     }
-  ]
+  ],
+  "require-dev": {
+    "humanmade/coding-standards": "^2.3"
+  },
+  "config": {
+    "allow-plugins": {
+      "composer/installers": true,
+      "dealerdirect/phpcodesniffer-composer-installer": true
+    }
+  }
 }
