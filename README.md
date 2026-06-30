@@ -62,6 +62,8 @@ The term is taken from the `termId` arg when given. When the `termId` argument i
 
 Optional args: `termId` (defaults to the queried term) and `size` (image size for `url`, defaults to `full`).
 
+When `url` is bound, the plugin also adds the `wp-image-{id}` class and computes responsive `srcset`/`sizes` for the term's image, so the bound image renders with the same responsive markup as a natively-inserted one. Block Bindings replace scalar attributes only, so this is done in a `render_block_core/image` filter rather than through the binding itself.
+
 **Post content** — pin a specific term:
 
 ```html
