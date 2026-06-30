@@ -484,7 +484,9 @@ class UI {
 		$term_key = 'term-' . $this->meta_key;
 
 		// Bail if not updating meta_key
+		// phpcs:ignore HM.Security.NonceVerification.Missing -- Existence check only.
 		$meta = ! empty( $_POST[ $term_key ] )
+			// phpcs:ignore HM.Security.NonceVerification.Missing -- WP verifies term nonce upstream before calling create_term or edit_term.
 			? sanitize_text_field( wp_unslash( $_POST[ $term_key ] ) )
 			: '';
 
