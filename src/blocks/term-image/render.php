@@ -26,7 +26,12 @@ if ( ! $image_id ) {
 	return;
 }
 
-$image = wp_get_attachment_image( $image_id, $img_size );
+$image = wp_get_attachment_image(
+	$image_id,
+	$img_size,
+	false,
+	[ 'style' => 'width:100%;height:auto;display:block;' ]
+);
 
 if ( ! $image ) {
 	return;
@@ -34,6 +39,6 @@ if ( ! $image ) {
 
 printf(
 	'<figure %s>%s</figure>',
-	get_block_wrapper_attributes(),
+	get_block_wrapper_attributes( [ 'style' => 'overflow:hidden;' ] ),
 	$image
 );
