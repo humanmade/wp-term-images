@@ -45,6 +45,47 @@ if ( ! empty( $image ) ) {
 }
 ```
 
+### How do I bind a term's image to an Image block?
+
+For WordPress 6.7+, plugin registers a [Block Bindings](https://developer.wordpress.org/block-editor/reference-guides/block-api/block-bindings/) source `wp-term-images/term-image` that can bind properties on the core Image block to properties of the image assigned to a term. Rendering is done on frontend render; the editor shows that the image is bound but as of 7.0 does not preview any term image properties.
+
+The source answers whichever Image attribute you bind:
+
+Attribute | Value
+---- | ----
+`url` | The attachment URL, **required** in order for the image to display.
+`alt` | The attachment alt text.
+`title` | The attachment title.
+`id` | The attachment ID. Updates the `wp-image-{id}` class only; it does not change `src`, so `url` must be bound for the image to display.
+
+The term is taken from the `termId` arg when given. When the `termId` argument is not provided, the binding will use the associated image when on a taxonomy archive for a term that has an image assigned.
+
+Optional args: `termId` (defaults to the queried term) and `size` (image size for `url`, defaults to `full`).
+
+When `url` is bound, the plugin also adds the `wp-image-{id}` class and computes responsive `srcset`/`sizes` for the term's image, so the bound image renders with the same responsive markup as a natively-inserted one. Block Bindings replace scalar attributes only, so this is done in a `render_block_core/image` filter rather than through the binding itself.
+
+**Post content** — pin a specific term:
+
+```html
+<!-- wp:image {"metadata":{"bindings":{
+	"url":{"source":"wp-term-images/term-image","args":{"termId":7,"size":"large"}},
+	"alt":{"source":"wp-term-images/term-image","args":{"termId":7}}
+}}} -->
+<figure class="wp-block-image"><img src="" alt=""/></figure>
+<!-- /wp:image -->
+```
+
+**Template** — bind to the current term on an archive (no `termId`):
+
+```html
+<!-- wp:image {"metadata":{"bindings":{
+	"url":{"source":"wp-term-images/term-image"},
+	"alt":{"source":"wp-term-images/term-image"}
+}}} -->
+<figure class="wp-block-image"><img src="" alt=""/></figure>
+<!-- /wp:image -->
+```
+
 ## Local Environment
 
 This project uses [wp-env](https://developer.wordpress.org/block-editor/reference-guides/packages/packages-env/) to run a lightweight, containerized WordPress instance at [localhost:3003](http://localhost:3003) for testing purposes. The default username for the localhost environment is `admin`, with the password `password`.
