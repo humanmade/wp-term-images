@@ -1,0 +1,61 @@
+name: Tag and Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version tag (e.g., v1.0.0)'
+        required: true
+      target_branch:
+        description: 'Branch to tag (e.g., release)'
+        default: release
+        required: true
+
+jobs:
+  tag_and_release:
+    name: Tag and Release
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+        with:
+          ref: ${{ github.event.inputs.target_branch }}
+          fetch-depth: 0
+
+      - name: Check if tag already exists
+        id: check_tag
+        run: |
+          if git rev-parse "refs/tags/${{ github.event.inputs.version }}" >/dev/null 2>&1; then
+            echo "tag_exists=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Abort if tag exists
+        if: steps.check_tag.outputs.tag_exists == 'true'
+        run: exit 1
+
+      - name: Bump version in plugin files
+        run: |
+          VERSION="${{ github.event.inputs.version }}"
+          VERSION="${VERSION#v}"
+          perl -pi -e "s/(Version:\s+)\d+\.\d+\.\d+/\${1}${VERSION}/" wp-term-images.php
+          perl -pi -e "s/(public \\\$version = ')\d+\.\d+\.\d+(')/\${1}${VERSION}\${2}/" includes/class-wp-term-images.php
+
+      - name: Commit version to release branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add wp-term-images.php includes/class-wp-term-images.php
+          git commit -m "Set version to ${{ github.event.inputs.version }}"
+          git push origin ${{ github.event.inputs.target_branch }}
+
+      - name: Create and push tag
+        run: |
+          git tag ${{ github.event.inputs.version }}
+          git push origin ${{ github.event.inputs.version }}
+
+      - name: Create GitHub Release
+        uses: ncipollo/release-action@b7eabc95ff50cbeeedec83973935c8f306dfcd0b # v1.20.0
+        with:
+          tag: ${{ github.event.inputs.version }}
+          name: ${{ github.event.inputs.version }}
+          draft: false
+          prerelease: false

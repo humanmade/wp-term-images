@@ -1,0 +1,42 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wp-term-images/term-image",
+	"title": "Term Image",
+	"description": "Displays the featured image assigned to a taxonomy term.",
+	"category": "media",
+	"icon": "format-image",
+	"keywords": [ "term", "taxonomy", "image", "category", "tag" ],
+	"attributes": {
+		"termId": {
+			"type": "integer",
+			"default": 0
+		},
+		"taxonomy": {
+			"type": "string",
+			"default": "category"
+		},
+		"imageSize": {
+			"type": "string",
+			"default": "full"
+		}
+	},
+	"usesContext": [ "postId" ],
+	"supports": {
+		"html": false,
+		"color": {
+			"background": false,
+			"text": false
+		},
+		"__experimentalUseBlockBindingsAPI": true,
+		"__experimentalBorder": {
+			"radius": true,
+			"color": false,
+			"width": false,
+			"style": false
+		}
+	},
+	"editorScript": "file:./index.js",
+	"render": "file:./render.php",
+	"textdomain": "wp-term-images"
+}
