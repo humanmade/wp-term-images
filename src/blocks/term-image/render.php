@@ -40,6 +40,6 @@ if ( ! $image ) {
 printf(
 	'<figure %s>%s</figure>',
 	get_block_wrapper_attributes( [ 'style' => 'overflow:hidden;' ] ),
-	// wp_get_attachment_image() escapes attributes internally.
+	// phpcs:ignore HM.Security.EscapeOutput.OutputNotEscaped -- wp_get_attachment_image() escapes internally.
 	$image
 );
