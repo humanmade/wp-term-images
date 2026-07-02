@@ -21,11 +21,19 @@
 			"default": "full"
 		}
 	},
+	"usesContext": [ "postId" ],
 	"supports": {
 		"html": false,
 		"color": {
 			"background": false,
 			"text": false
+		},
+		"__experimentalUseBlockBindingsAPI": true,
+		"__experimentalBorder": {
+			"radius": true,
+			"color": false,
+			"width": false,
+			"style": false
 		}
 	},
 	"editorScript": "file:./index.js",

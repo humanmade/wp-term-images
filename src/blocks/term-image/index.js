@@ -1,5 +1,9 @@
 import { registerBlockType } from '@wordpress/blocks';
-import { InspectorControls, useBlockProps } from '@wordpress/block-editor';
+import {
+	InspectorControls,
+	useBlockProps,
+	store as blockEditorStore,
+} from '@wordpress/block-editor';
 import {
 	PanelBody,
 	Placeholder,
@@ -11,13 +15,6 @@ import { useSelect } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
 
 import metadata from './block.json';
-
-const IMAGE_SIZE_OPTIONS = [
-	{ label: __( 'Thumbnail', 'wp-term-images' ), value: 'thumbnail' },
-	{ label: __( 'Medium', 'wp-term-images' ), value: 'medium' },
-	{ label: __( 'Large', 'wp-term-images' ), value: 'large' },
-	{ label: __( 'Full', 'wp-term-images' ), value: 'full' },
-];
 
 function Edit( { attributes, setAttributes } ) {
 	const { termId, taxonomy, imageSize } = attributes;
@@ -41,6 +38,11 @@ function Edit( { attributes, setAttributes } ) {
 			} );
 		},
 		[ taxonomy ]
+	);
+
+	const imageSizes = useSelect(
+		( select ) => select( blockEditorStore ).getSettings().imageSizes,
+		[]
 	);
 
 	const taxonomyOptions = taxonomies
@@ -93,14 +95,19 @@ function Edit( { attributes, setAttributes } ) {
 							}
 						/>
 					) }
-					<SelectControl
-						label={ __( 'Image size', 'wp-term-images' ) }
-						value={ imageSize }
-						options={ IMAGE_SIZE_OPTIONS }
-						onChange={ ( value ) =>
-							setAttributes( { imageSize: value } )
-						}
-					/>
+					{ imageSizes && imageSizes.length > 0 && (
+						<SelectControl
+							label={ __( 'Image Size', 'wp-term-images' ) }
+							value={ imageSize }
+							options={ imageSizes.map( ( size ) => ( {
+								label: size.name,
+								value: size.slug,
+							} ) ) }
+							onChange={ ( value ) =>
+								setAttributes( { imageSize: value } )
+							}
+						/>
+					) }
 				</PanelBody>
 			</InspectorControls>
 

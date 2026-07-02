@@ -52,3 +52,14 @@ function _wp_term_images_register_blocks() {
 	register_block_type_from_metadata( __DIR__ . '/build/blocks/term-image' );
 }
 add_action( 'init', '_wp_term_images_register_blocks' );
+
+/**
+ * Allow the termId attribute to be used with block bindings.
+ *
+ * Third-party blocks aren't included in core's supported attributes list
+ * by default, so bindings on termId are silently ignored without this.
+ */
+add_filter( 'block_bindings_supported_attributes_wp-term-images/term-image', function ( array $supported_attributes ): array {
+	$supported_attributes[] = 'termId';
+	return $supported_attributes;
+} );
