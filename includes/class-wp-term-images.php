@@ -154,15 +154,19 @@ final class WP_Term_Images extends JJJ\WP\Term\Meta\UI {
 
 		// Get the meta value
 		$value  = $this->get_meta( $term_id );
-		$hidden = '';
+
+		$maybe_hide_element = function() use ( $value ) {
+			if ( empty( $value ) ) {
+				echo 'style="display:none;"';
+			}
+		};
 
 		if ( empty( $value ) ) {
-			$hidden = ' style="display: none;"';
 			$value = 0;
 		} ?>
 
 		<div>
-			<img id="wp-term-images-photo" src="<?php echo esc_url( wp_get_attachment_image_url( $value, 'full' ) ); ?>"<?php echo $hidden; ?> />
+			<img id="wp-term-images-photo" src="<?php echo esc_url( wp_get_attachment_image_url( $value, 'full' ) ); ?>" <?php $maybe_hide_element() ?> />
 			<input type="text" style="display: none;" name="term-<?php echo esc_attr( $this->meta_key ); ?>" id="term-<?php echo esc_attr( $this->meta_key ); ?>" value="<?php echo esc_attr( $value ); ?>" />
 		</div>
 
@@ -170,7 +174,7 @@ final class WP_Term_Images extends JJJ\WP\Term\Meta\UI {
 			<?php esc_html_e( 'Choose Image', 'wp-term-images' ); ?>
 		</a>
 
-		<a href="<?php echo esc_url( $remove_url ); ?>" class="button wp-term-images-remove"<?php echo $hidden; ?>>
+		<a href="<?php echo esc_url( $remove_url ); ?>" class="button wp-term-images-remove" <?php $maybe_hide_element() ?>>
 			<?php esc_html_e( 'Remove', 'wp-term-images' ); ?>
 		</a>
 
