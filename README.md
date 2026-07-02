@@ -103,6 +103,31 @@ Command | Purpose
 
 <sup>&ddagger;</sup> This command deliberately filters out GET/OPTIONS/HEAD/POST/PUT access log entries
 
+## Release Process
+
+> [!NOTE]
+> This plugin is currently distributed via Composer as `humanmade/wp-term-images`, not via the plugins repository.
+
+Merges to `main` automatically [build](https://github.com/humanmade/wp-term-images/actions/workflows/build-release-branch.yml) to the `release` branch. A project may track the `release` branch using [Composer](https://getcomposer.org/) to pull in the latest built beta version.
+
+Commits on the `release` branch may be tagged for installation via [Packagist](https://packagist.org/packages/humanmade/wp-term-images) and marked as releases in GitHub for manual download, using a manually-dispatched ["Tag and Release" GH Actions workflow](https://github.com/humanmade/wp-term-images/actions/workflows/tag-and-release.yml).
+
+To tag a new release:
+
+1. Choose the target version number using [semantic versioning](https://semver.org/).
+2. Check out a `prepare-v#.#.#` branch.
+3. Bump the `Version` in the [wp-term-images.php](./wp-term-images.php) PHPDoc header.
+4. Update the changelog entries in [readme.txt](./readme.txt).
+5. Open a pull request titled "Prepare release v#.#.#".
+6. Review and merge the "Prepare release" pull request.
+7. Wait for the `release` branch to [update](https://github.com/humanmade/wp-term-images/actions/workflows/build-release-branch.yml) with the build that includes the new version number.
+8. On the ["Tag and Release" GH Action page](https://github.com/humanmade/wp-term-images/actions/workflows/tag-and-release.yml):
+   - Click "Run workflow" in the `workflow_dispatch` banner.
+   - Fill out the "Version tag" field with your target version number. This must match the `Version` in `wp-term-images.php`. Use the format `v#.#.#`.
+   - Click "Run workflow" to apply the specified tag to the `release` branch.
+
+Once the workflow completes, the new version is [tagged](https://github.com/humanmade/wp-term-images/tags) and listed in [releases](https://github.com/humanmade/wp-term-images/releases).
+
 ### Where can I get support?
 
 * Basic: https://wordpress.org/support/plugin/wp-term-images/
