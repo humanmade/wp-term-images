@@ -1,13 +1,12 @@
 === WP Term Images ===
-Contributors:      johnjamesjacoby, stuttter
+Contributors:      johnjamesjacoby, stuttter, humanmade
 Tags:              taxonomy, term, meta, metadata, image, images
-Requires PHP:      5.6.20
-Requires at least: 4.4
-Tested up to:      5.7
-Stable tag:        2.0.2
+Requires PHP:      8.2
+Requires at least: 6.5
+Tested up to:      7.0
+Stable tag:        2.1.0
 License:           GPLv2 or later
 License URI:       http://www.gnu.org/licenses/gpl-2.0.html
-Donate link:       https://ko-fi.com/jjj
 
 == Description ==
 
@@ -84,6 +83,10 @@ if ( ! empty( $image ) ) {
 http://github.com/stuttter/wp-term-images/
 
 == Changelog ==
+
+= [2.1.0] - 2026-07-02 =
+* Add support for block bindings
+* Introduce a basic Term Image block
 
 = [2.0.2] - 2022-03-10 =
 * Fix fatal error

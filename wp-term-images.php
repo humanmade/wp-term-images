@@ -3,12 +3,12 @@
 /**
  * Plugin Name: WP Term Images
  * Plugin URI:  https://wordpress.org/plugins/wp-term-images/
- * Author:      John James Jacoby
+ * Author:      John James Jacoby, Human Made
  * Author URI:  https://profiles.wordpress.org/johnjamesjacoby/
  * License:     GPLv2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  * Description: Pretty images for categories, tags, and other taxonomy terms
- * Version:     2.0.2
+ * Version:     2.1.0
  * Text Domain: wp-term-images
  * Domain Path: /assets/lang/
  */
