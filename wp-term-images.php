@@ -29,6 +29,9 @@ function _wp_term_images() {
 	// Classes
 	require_once $plugin_path . 'includes/class-wp-term-meta-ui.php';
 	require_once $plugin_path . 'includes/class-wp-term-images.php';
+
+	// Block bindings
+	require_once $plugin_path . 'includes/block-bindings.php';
 }
 add_action( 'plugins_loaded', '_wp_term_images' );
 
