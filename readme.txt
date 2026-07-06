@@ -4,7 +4,7 @@ Tags:              taxonomy, term, meta, metadata, image, images
 Requires PHP:      8.2
 Requires at least: 6.5
 Tested up to:      7.0
-Stable tag:        2.1.0
+Stable tag:        2.2.0
 License:           GPLv2 or later
 License URI:       http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -83,6 +83,9 @@ if ( ! empty( $image ) ) {
 http://github.com/stuttter/wp-term-images/
 
 == Changelog ==
+
+= [2.2.0] - 2026-07-06 =
+* Make block bindings term context filterable to support dynamic template use outside of term archives
 
 = [2.1.0] - 2026-07-02 =
 * Add support for block bindings
