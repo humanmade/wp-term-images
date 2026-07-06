@@ -128,6 +128,22 @@ function _wp_term_images_resolve_image_id( $source_args = array() ) {
 		}
 	}
 
+	/**
+	 * Filter the term ID used for fallback term-image bindings.
+	 *
+	 * Lets sites supply a term when neither the `termId` source arg nor the
+	 * queried object provided one.
+	 *
+	 * This can be used to e.g. bind to a post's primary category on a singular
+	 * post template.
+	 *
+	 * @since 2.2.0
+	 *
+	 * @param int   $term_id     Resolved term ID, 0 when none was found.
+	 * @param array $source_args Binding source args.
+	 */
+	$term_id = (int) apply_filters( 'wp_term_images_binding_term_id', $term_id, $source_args );
+
 	if ( empty( $term_id ) ) {
 		return 0;
 	}
